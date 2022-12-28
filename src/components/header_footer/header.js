@@ -1,47 +1,64 @@
 import React from "react";
-import { AppBar, Toolbar, Button } from '@mui/material';
+import { AppBar, Toolbar, Button } from "@mui/material";
 
-import { Link } from 'react-router-dom';
+import { showErrorToast, showSuccessToast } from "../utils/tools";
 
-import {LionCsk} from '../utils/tools.js';
+import { Link } from "react-router-dom";
 
+import { LionCsk } from "../utils/tools.js";
 
-const Header=()=>{
-    return(
-        <AppBar
-            position="fixed"
-            style={{
-                backgroundColor:'#ebd834',
-                boxShadow:'none',
-                padding:'10px 0px',
-                borderBottom: '2px solid #eb7d34'
-            }}
-        >
-            <Toolbar style={{ display:'flex' }}>
-                <div style={{ flexGrow: 1 }}>
-                    <div className="header_logo">
-                        <LionCsk
-                            link={true}
-                            linkTo={'/'}
-                            width="80px"
-                            height="80px"
-                        />
-                    </div>
-                </div>
+import { firebase } from "../../firebase";
 
-                <Link to="/the_team">
-                    <Button color="inherit">The team</Button>
-                </Link>
-                <Link to="/the_matches">
-                    <Button color="inherit">Matches</Button>
-                </Link>
+const Header = ({ user }) => {
+  const logoutHandler = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        showSuccessToast("Good bye!!");
+      })
+      .catch((error) => {
+        showErrorToast(error.message);
+      });
+  };
 
-                <Link to="/dashboard">
-                    <Button color="inherit">Dashboard</Button>
-                </Link>
+  return (
+    <AppBar
+      position="fixed"
+      style={{
+        backgroundColor: "#ebd834",
+        boxShadow: "none",
+        padding: "10px 0px",
+        borderBottom: "2px solid #eb7d34",
+      }}
+    >
+      <Toolbar style={{ display: "flex" }}>
+        <div style={{ flexGrow: 1 }}>
+          <div className="header_logo">
+            <LionCsk link={true} linkTo={"/"} width="80px" height="80px" />
+          </div>
+        </div>
 
-            </Toolbar>
-        </AppBar>
-    )
-}
+        <Link to="/the_team">
+          <Button color="inherit">The team</Button>
+        </Link>
+        <Link to="/the_matches">
+          <Button color="inherit">Matches</Button>
+        </Link>
+
+        {user ? (
+          <>
+            <Link to="/dashboard">
+              <Button color="inherit">Dashboard</Button>
+            </Link>
+
+            <Button color="inherit" onClick={() => logoutHandler()}>
+              Log out
+            </Button>
+          </>
+        ) : null}
+      </Toolbar>
+    </AppBar>
+  );
+};
 export default Header;
