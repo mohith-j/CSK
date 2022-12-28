@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { firebase } from "../../firebase";
 
 
 import LionCskLogo from "../../Resources/images/logos/Chennai_Super_Kings_Logo.svg.png";
@@ -39,5 +40,17 @@ export const showSuccessToast = (msg) => {
   toast.success(msg,{
       position: toast.POSITION.TOP_LEFT
   })
+};
+
+export const logoutHandler = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      showSuccessToast("Good bye!!");
+    })
+    .catch((error) => {
+      showErrorToast(error.message);
+    });
 };
 

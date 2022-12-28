@@ -1,26 +1,24 @@
 import React from "react";
 import { AppBar, Toolbar, Button } from "@mui/material";
 
-import { showErrorToast, showSuccessToast } from "../utils/tools";
+import { logoutHandler } from "../utils/tools";
 
 import { Link } from "react-router-dom";
 
 import { LionCsk } from "../utils/tools.js";
 
-import { firebase } from "../../firebase";
-
 const Header = ({ user }) => {
-  const logoutHandler = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        showSuccessToast("Good bye!!");
-      })
-      .catch((error) => {
-        showErrorToast(error.message);
-      });
-  };
+  // const logoutHandler = () => {
+  //   firebase
+  //     .auth()
+  //     .signOut()
+  //     .then(() => {
+  //       showSuccessToast("Good bye!!");
+  //     })
+  //     .catch((error) => {
+  //       showErrorToast(error.message);
+  //     });
+  // };
  
   return (
     <AppBar

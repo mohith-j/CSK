@@ -14,7 +14,7 @@ a {
 }
 
 .bck_yellow {
-    background: #ebd834;
+    background: #ddd166;
 }
 
 .bck_lyellow {
@@ -718,7 +718,7 @@ footer .footer_discl {
 .user_dashboard {
     font-size: 60px;
     font-family: 'Righteous', cursive;
-    color: #d5ebfe;
+    color: hwb(54 39% 13%);
     text-align: center;
     margin-top: 200px;
 }
