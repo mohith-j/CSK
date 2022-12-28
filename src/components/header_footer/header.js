@@ -21,7 +21,7 @@ const Header = ({ user }) => {
         showErrorToast(error.message);
       });
   };
-
+ 
   return (
     <AppBar
       position="fixed"
